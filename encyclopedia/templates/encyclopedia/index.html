@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ Title }}
+{% endblock %}
+
+{% block body %}
+    
+    {% if Status == "title" %}
+    <h1>{{ Title }}</h1>
+    {{ Entry|safe }}
+    <p><a href="/edit/{{Title}}"> Edit {{Title}}</a></p>
+    {% elif Status == "error" %}
+    <h1>{{ Title }}</h1>
+    <p> {{ Entry }} </p>
+    {% elif Status == "index" %}
+    <h1>All Pages</h1>
+    <ul>
+        {% for entry in entries %}
+            <li> <a href="/{{entry}}">{{ entry }}</a></li>
+        {% endfor %}
+    </ul>
+    {% elif Status == "search"%}
+    <h1>Search Results</h1>
+    <ul>
+        {% for entry in entries %}
+            <li> <a href="/{{entry}}">{{ entry }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}
